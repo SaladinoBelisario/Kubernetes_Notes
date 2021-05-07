@@ -85,3 +85,32 @@ Example of showing the logs of the Apache Pod:
     - Not used for Pods, but for giving pods a DNS name to use for something 
       outside Kubernetes.
     - Anyone can connect (if they can reach node).
+  
+## Management techniques
+
+### Run, Create and expose Generators
+* Every resource in Kubernetes has a specification.
+> kubectl create deployment sample --image nginx --dry-run -o yaml
+
+
+## Declarative Kubernetes
+
+You can use _kubctl apply_ to use a YAML file with a declarative approach, this it's a 
+more complex format than Compose, but provides an improved flexibility and 
+extensibility.
+
+* Each file contains one or more manifests.
+* Each manifest describes an API object(deployment, job, secret).
+* Each manifest requires four parts (root key:values in the file):
+  - apiVersion: 
+  - kind:
+  - metadata:
+  - spec:
+  
+For obtaining a detailed explanation for all keys each kind supports:
+> kubectl explain services.spec
+
+_spec:_ can have sub _spec:_ for other services.
+> kubectl explain deployment.spec.template.spec.volumes.nfs.server
+
+we can also use the docs.
